@@ -1,4 +1,4 @@
-# FlushWars Privacy Policy
+
 
 Last updated: March 15, 2026
 
