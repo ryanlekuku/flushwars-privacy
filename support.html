@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FlushWars Support</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown:   #913f00;
+      --orange:  #d9781a;
+      --amber:   #f7bf22;
+      --cream:   #fff8f0;
+      --tan:     #f2e4d4;
+      --white:   #ffffff;
+      --text:    #3a1a00;
+      --muted:   #9a7055;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--brown);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 18px,
+        rgba(255,255,255,0.03) 18px,
+        rgba(255,255,255,0.03) 36px
+      );
+    }
+    .header-emoji {
+      font-size: 64px;
+      display: block;
+      margin-bottom: 12px;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    header h1 {
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(2rem, 6vw, 3rem);
+      color: var(--amber);
+      letter-spacing: 1px;
+    }
+    header p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      margin-top: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── FAQ ── */
+    .section-label {
+      font-family: 'Lilita One', cursive;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .faq { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+
+    .faq-item {
+      background: var(--white);
+      border-radius: 16px;
+      border: 2px solid var(--tan);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: var(--amber); }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--brown);
+    }
+    .faq-q .icon { font-size: 20px; flex-shrink: 0; }
+    .faq-q .chevron {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--muted);
+      transition: transform 0.25s;
+    }
+    .faq-item.open .chevron { transform: rotate(180deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 600;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 20px 18px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-card {
+      background: var(--brown);
+      border-radius: 24px;
+      padding: 36px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::after {
+      content: '🚽';
+      position: absolute;
+      font-size: 120px;
+      right: -20px;
+      bottom: -20px;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+    .contact-card h2 {
+      font-family: 'Lilita One', cursive;
+      font-size: 1.6rem;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+    .contact-card p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .email-btn {
+      display: inline-block;
+      background: var(--amber);
+      color: var(--brown);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    }
+    .email-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+    }
+    .email-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="header-emoji">🚽</span>
+    <h1>FlushWars Support</h1>
+    <p>We've got your back (and your streak)</p>
+  </header>
+
+  <main>
+
+    <p class="section-label">Common Questions</p>
+
+    <div class="faq">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="icon">🔑</span>
+          I forgot my PIN — how do I get back in?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="faq-a">
+          On the PIN entry screen, tap <strong>Forgot PIN?</strong> and enter the email or phone number linked to your account. We'll find your username and let you set a new PIN right away.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="icon">👤</span>
+          I forgot my username — what do I do?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="faq-a">
+          On the username entry screen, tap <strong>Forgot your username?</strong> and enter the email or phone number you registered with. We'll look it up and fill it in for you.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="icon">💩</span>
+          Why is there a daily limit on logs?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="faq-a">
+          The daily limit of 5 keeps things fair and competitive. It resets automatically each day at midnight so you're always ready for the next battle.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="icon">🔥</span>
+          I lost my streak — can it be restored?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="faq-a">
+          Streaks reset if you miss a day without logging. Unfortunately we can't manually restore streaks — but your all-time best streak is always saved on your profile!
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="icon">🔔</span>
+          I'm not receiving notifications
+          <span class="chevron">▼</span>
+        </button>
+        <div class="faq-a">
+          Go to your iPhone's <strong>Settings → FlushWars → Notifications</strong> and make sure notifications are enabled. Also check that Background App Refresh is turned on so activity updates can reach you.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="icon">🗑️</span>
+          How do I delete my account?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="faq-a">
+          Go to <strong>Settings</strong> inside the app and tap <strong>Delete Account</strong>. This permanently removes all your data. If you have trouble, email us and we'll handle it within 48 hours.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="icon">⚔️</span>
+          How do competitions work?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="faq-a">
+          Add a friend, then tap <strong>⚔️ Battle</strong> on their name to send a challenge. Once they accept, you'll both appear on each other's leaderboard. Weekly counts reset every Monday — the highest count wins the week!
+        </div>
+      </div>
+
+    </div>
+
+    <div class="contact-card">
+      <h2>Still need help?</h2>
+      <p>Can't find what you're looking for?<br/>Send us a message and we'll get back to you.</p>
+      <a class="email-btn" href="mailto:flushwars@yahoo.com">✉️ Email Support</a>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 FlushWars · All rights reserved
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>
